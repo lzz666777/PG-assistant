@@ -6,7 +6,9 @@ compatibility_date = "2026-11-01"
 # 多个用英文逗号分隔；本地调试可保留 localhost
 [vars]
 ALLOWED_ORIGINS = "https://lzz666777.github.io,http://localhost:8000,http://127.0.0.1:8000"
-MODEL = "deepseek-chat"
+# deepseek-flash：快、便宜，和当前项目助教同款；deepseek-v4-pro：更强，适合复杂问题
+# 可用 ID 以 https://api.deepseek.com/models 返回为准
+MODEL = "deepseek-flash"
 # ACCESS_CODE = "team2027"          # 可选：设置后前端也要填同样的访问码
 # RATE_LIMIT_PER_DAY = "300"        # 可选：需要绑定 KV 才生效
 

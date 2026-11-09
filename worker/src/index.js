@@ -63,7 +63,7 @@ export default {
     const url = new URL(request.url);
 
     if (request.method === "GET" && url.pathname === "/health") {
-      return json({ ok: true, model: env.MODEL || "deepseek-chat" }, 200, cors);
+      return json({ ok: true, model: env.MODEL || "deepseek-flash" }, 200, cors);
     }
 
     if (request.method !== "POST" || url.pathname !== "/chat") {
@@ -102,13 +102,17 @@ export default {
       return json({ error: "今天问得太多了，明天再来" }, 429, cors);
     }
 
+    const model = env.MODEL || "deepseek-flash";
     const payload = {
-      model: env.MODEL || "deepseek-chat",
+      model,
       messages: body.messages.map((m) => ({ role: m.role, content: m.content })),
-      temperature: 0.2,
       max_tokens: 1400,
       stream: false
     };
+    // reasoner 类模型不支持/忽略 temperature，普通 chat 模型才传
+    if (!/reasoner/i.test(model)) {
+      payload.temperature = 0.2;
+    }
 
     let upstream;
     try {

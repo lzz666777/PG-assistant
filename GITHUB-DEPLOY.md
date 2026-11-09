@@ -191,7 +191,7 @@ https://你的-worker-地址/health
 看到类似：
 
 ```json
-{"ok":true,"model":"deepseek-chat"}
+{"ok":true,"model":"deepseek-flash"}
 ```
 
 说明 Worker 正常。
@@ -210,7 +210,7 @@ https://你的-worker-地址/health
 6. 进入这个 Worker 的 **Settings → Variables and Secrets**，添加：
    - `DEEPSEEK_API_KEY`：类型选 **Secret**，值填你的 Key；
    - `ALLOWED_ORIGINS`：类型选 **Text**，值填 `https://你的用户名.github.io`；
-   - `MODEL`：类型选 **Text**，值填 `deepseek-chat`（可选）。
+   - `MODEL`：类型选 **Text**，值填 `deepseek-flash`（可选）。
 7. 点 **Save and deploy**。
 8. Worker 首页会显示访问地址，例如 `https://charging-project-tutor.你的子域.workers.dev`。
 
@@ -296,7 +296,7 @@ window.PROJECT_CONFIG = {
 
 - 五个人共用**同一个 Key**，所有请求都记在 Key 主人的 DeepSeek 账户。
 - 在 https://platform.deepseek.com/ 的“用量/账单”里看每天花了多少。
-- 模型默认 `deepseek-chat`，便宜；5 个人日常问答，一般每月几块到十几块。
+- 模型默认 `deepseek-flash`，便宜；5 个人日常问答，一般每月几块到十几块。
 - 想限额：给 Worker 绑定 KV 后，在 `wrangler.toml` 加：
 
 ```toml

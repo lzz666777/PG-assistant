@@ -247,7 +247,7 @@ function renderHistory() {
     renderWelcome();
     return;
   }
-  for (const m of list) addMessage(m.role, m.content, m.sources || [], false);
+  for (const m of list) addMessage(m.role, m.content, m.sources || [], false, m.usage || null);
   scrollBottom();
 }
 
@@ -277,7 +277,7 @@ function renderWelcome() {
   box.appendChild(wrap);
 }
 
-function addMessage(role, content, sources = [], animate = true) {
+function addMessage(role, content, sources = [], animate = true, usage = null) {
   const box = $("#messages");
   const welcome = box.querySelector(".welcome");
   if (welcome) welcome.remove();
@@ -317,6 +317,11 @@ function addMessage(role, content, sources = [], animate = true) {
   if (role === "assistant") {
     const meta = document.createElement("div");
     meta.className = "meta";
+    if (usage && usage.prompt_tokens != null) {
+      const u = document.createElement("span");
+      u.textContent = `tokens 输入 ${usage.prompt_tokens} / 输出 ${usage.completion_tokens ?? "?"}`;
+      meta.appendChild(u);
+    }
     const copy = document.createElement("button");
     copy.type = "button";
     copy.className = "copy";
@@ -417,7 +422,7 @@ async function callAPI(messages) {
     throw err;
   }
   if (!data.content) throw new Error("接口没有返回内容");
-  return data.content;
+  return data;
 }
 
 async function send(text) {
@@ -459,11 +464,13 @@ async function send(text) {
       ...history.slice(-12).map((m) => ({ role: m.role, content: m.content }))
     ];
 
-    const answer = await callAPI(messages);
+    const data = await callAPI(messages);
+    const answer = data.content;
+    const usage = data.usage || null;
     removeTyping();
-    history.push({ role: "assistant", content: answer, sources });
+    history.push({ role: "assistant", content: answer, sources, usage });
     saveHistory();
-    addMessage("assistant", answer, sources);
+    addMessage("assistant", answer, sources, true, usage);
   } catch (e) {
     removeTyping();
     let msg = "";
@@ -626,7 +633,12 @@ function seedDemo() {
   if (!sources.length && state.chunks.length) sources.push(state.chunks[0]);
   state.history[state.role] = [
     { role: "user", content: demoQ },
-    { role: "assistant", content: demoA, sources }
+    {
+      role: "assistant",
+      content: demoA,
+      sources,
+      usage: { prompt_tokens: 3860, completion_tokens: 420 }
+    }
   ];
   renderHistory();
   hideBanner();

@@ -131,6 +131,7 @@ window.PROJECT_CONFIG = {
   - 韩昊峰：“3 分钟演示脚本？”
   - 周思琪：“报告第一章写什么？”
 - 回答下方的“资料n”可以点开看原文；
+- 每条回答下方会显示本次输入/输出 tokens，方便估费用；
 - “设置”里可以改 Worker 地址、访问码、清空对话。
 - 没有 API 时，打开 `?demo=1` 可以看界面预览（不会真的调用模型），例如：`https://你的用户名.github.io/charging-project-tutor/?demo=1`。
 
