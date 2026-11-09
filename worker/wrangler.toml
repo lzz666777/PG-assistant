@@ -1,0 +1,16 @@
+name = "charging-project-tutor"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+# 生产环境把 ALLOWED_ORIGINS 改成你的 GitHub Pages 地址
+# 多个用英文逗号分隔；本地调试可保留 localhost
+[vars]
+ALLOWED_ORIGINS = "https://lzz666777.github.io,http://localhost:8000,http://127.0.0.1:8000"
+MODEL = "deepseek-chat"
+# ACCESS_CODE = "team2027"          # 可选：设置后前端也要填同样的访问码
+# RATE_LIMIT_PER_DAY = "300"        # 可选：需要绑定 KV 才生效
+
+# 可选：绑定 KV 做每日限额
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>项目助教 · 充电站运营可视分析</title>
+  <meta name="description" content="2027 数据要素大赛项目组内部助教：基于项目文档回答，标注依据，资料没有就直说。" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">桩</div>
+        <div class="brand-text">
+          <h1>项目助教</h1>
+          <p>充电站运营可视分析 · 5 人组</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <h2>我是谁</h2>
+        <div class="roles" id="role-list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>常问问题</h2>
+        <div class="quick" id="quick-list"></div>
+      </section>
+
+      <section class="panel knowledge-panel">
+        <h2>资料库 <span class="count" id="doc-count"></span></h2>
+        <div class="doc-list" id="doc-list"></div>
+      </section>
+
+      <div class="sidebar-foot">
+        <button class="ghost" id="btn-settings" type="button">设置</button>
+        <button class="ghost" id="btn-clear" type="button">清空对话</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn" id="btn-menu" type="button" aria-label="打开菜单">☰</button>
+        <div class="topbar-title">
+          <h2 id="chat-title">项目助教</h2>
+          <p id="chat-sub">基于项目文档回答 · 会标注依据</p>
+        </div>
+        <div class="status" id="status"><span class="dot"></span><span id="status-text">连接中</span></div>
+      </header>
+
+      <div class="banner hidden" id="banner"></div>
+
+      <div class="messages" id="messages"></div>
+
+      <form class="composer" id="composer">
+        <textarea id="input" rows="1" placeholder="问一个具体问题，比如：这周彭加欣该先做什么？"></textarea>
+        <button class="send" id="send" type="submit">发送</button>
+      </form>
+      <div class="hint">答案基于项目资料；重要结论请回到原文核对。资料没有时，它会直说“没有”。</div>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="modal-title">标题</h3>
+        <button class="icon-btn" id="modal-close" type="button" aria-label="关闭">×</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="assets/config.js"></script>
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>
