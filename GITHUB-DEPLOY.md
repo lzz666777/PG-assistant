@@ -25,7 +25,7 @@
 
 1. 登录 GitHub，右上角 **+** → **New repository**。
 2. 填写：
-   - **Repository name**：`charging-project-tutor`（可换，记住它）。
+   - **Repository name**：`PG-assistant`（可换，记住它）。
    - **Description**：项目助教（可选）。
    - **Public** 选中。
    - **不要**勾选 “Add a README file”（我们有自己的 README）。
@@ -34,7 +34,7 @@
 创建后页面会显示仓库地址，例如：
 
 ```
-https://github.com/你的用户名/charging-project-tutor
+https://github.com/你的用户名/PG-assistant
 ```
 
 ---
@@ -64,7 +64,7 @@ https://github.com/你的用户名/charging-project-tutor
 1. 安装 GitHub Desktop：https://desktop.github.com/
 2. 登录 GitHub。
 3. **File → Add local repository**，选择 `D:\学校文件\数据要素大赛\project-site`。
-4. 如果提示 “not a git repository”，点 **create a repository**，名字填 `charging-project-tutor`，**不要**勾选 “Initialize with README”。
+4. 如果提示 “not a git repository”，点 **create a repository**，名字填 `PG-assistant`，**不要**勾选 “Initialize with README”。
 5. 左下角填 commit message，点 **Commit to main**。
 6. 点 **Publish repository**，**取消勾选 “Keep this code private”**，发布。
 
@@ -76,7 +76,7 @@ git init
 git add .
 git commit -m "init: project tutor"
 git branch -M main
-git remote add origin https://github.com/你的用户名/charging-project-tutor.git
+git remote add origin https://github.com/你的用户名/PG-assistant.git
 git push -u origin main
 ```
 
@@ -99,7 +99,7 @@ git push -u origin main
 ### 3.2 你的网址
 
 ```
-https://你的用户名.github.io/charging-project-tutor/
+https://你的用户名.github.io/PG-assistant/
 ```
 
 如果仓库名是 `你的用户名.github.io`，网址是：
@@ -153,7 +153,7 @@ D:\学校文件\数据要素大赛\project-site\worker\wrangler.toml
 ALLOWED_ORIGINS = "https://你的用户名.github.io,http://localhost:8000"
 ```
 
-> 只写域名，不要带 `/charging-project-tutor/`，不要带末尾斜杠。
+> 只写域名，不要带 `/PG-assistant/`，不要带末尾斜杠。
 
 ### 4.4 部署
 
@@ -334,4 +334,4 @@ wrangler deploy
 2. Settings → Pages → Source 选 GitHub Actions。
 3. `npm i -g wrangler` → `wrangler login` → 改 `ALLOWED_ORIGINS` → `wrangler deploy` → `wrangler secret put DEEPSEEK_API_KEY`。
 4. 把 Worker 地址填进 `assets/config.js` 的 `API_BASE`。
-5. 打开 `https://你的用户名.github.io/charging-project-tutor/`，看到“在线”就成了。
+5. 打开 `https://你的用户名.github.io/PG-assistant/`，看到“在线”就成了。

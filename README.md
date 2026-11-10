@@ -24,7 +24,7 @@
 ## 二、把网页放到 GitHub Pages
 
 ### 1. 建仓库
-在 GitHub 新建一个公开仓库，例如 `charging-project-tutor`。
+在 GitHub 新建一个公开仓库，例如 `PG-assistant`。
 
 ### 2. 上传文件
 把本文件夹里的所有内容上传到仓库根目录（不要多套一层文件夹）。可以用：
@@ -42,7 +42,7 @@
 等 Actions 跑完（约 1 分钟），网址是：
 
 ```
-https://<你的用户名>.github.io/charging-project-tutor/
+https://<你的用户名>.github.io/PG-assistant/
 ```
 
 如果仓库名是 `<你的用户名>.github.io`，网址就是 `https://<你的用户名>.github.io/`。
@@ -133,7 +133,7 @@ window.PROJECT_CONFIG = {
 - 回答下方的“资料n”可以点开看原文；
 - 每条回答下方会显示本次输入/输出 tokens，方便估费用；
 - “设置”里可以改 Worker 地址、访问码、清空对话。
-- 没有 API 时，打开 `?demo=1` 可以看界面预览（不会真的调用模型），例如：`https://你的用户名.github.io/charging-project-tutor/?demo=1`。
+- 没有 API 时，打开 `?demo=1` 可以看界面预览（不会真的调用模型），例如：`https://你的用户名.github.io/PG-assistant/?demo=1`。
 
 ---
 
