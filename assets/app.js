@@ -433,9 +433,15 @@ async function callAPI(messages) {
 
 const PROJECT_HINTS =
   /项目|充电|电站|电网|电价|电费|服务费|停车费|占位|排队|价格|审计|反馈|站点|城市|赛|答辩|报告|分工|数据|指标|可视化|智能体|用户|运营商|政府|长沙|深圳|北京|上海|重庆|郴州|UrbanEV|特来电|星星|小桔|高德|百度|2026|2027/i;
+const PROJECT_STRONG =
+  /项目|充电|电桩|电站|电网|电价|电费|服务费|停车费|占位|排队|价格|审计|反馈|赛|答辩|分工|报告|站点|城市|运营商|政府|长沙|深圳|北京|上海|重庆|郴州|UrbanEV|特来电|星星|小桔|高德|百度/i;
+const TECH_HINTS =
+  /python|pandas|streamlit|plotly|git|github|vscode|vs code|代码|报错|函数|库|路径|图标|emoji|material|svg|docx|excel|word/i;
 
 function isProjectQuestion(text) {
-  return PROJECT_HINTS.test(String(text || ""));
+  const q = String(text || "");
+  if (TECH_HINTS.test(q) && !PROJECT_STRONG.test(q)) return false;
+  return PROJECT_HINTS.test(q);
 }
 
 async function send(text) {
