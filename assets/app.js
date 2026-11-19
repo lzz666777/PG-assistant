@@ -5,64 +5,64 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 const ROLES = {
   "刘子正": {
-    title: "队长 · 分析/预测/智能体",
+    title: "队长 · 总体/价格/智能体",
     focus:
-      "刘子正是队长，人工智能专业，负责分析、预测、智能体、系统集成和答辩主陈述。回答他时，优先给模型选择、特征、回测、智能体工具、集成与答辩的具体步骤；提醒他每周 12—15 小时、不要全包。",
+      "刘子正是队长，人工智能专业，负责项目总体、价格与占位分析、预测、智能体、系统集成和答辩主陈述。回答他时，优先给四条主线的优先级、指标口径、模型/仿真、集成与答辩步骤；提醒他每周 12—15 小时、不要全包。",
     questions: [
-      "这周我该先做什么？",
-      "LightGBM 基线怎么定？",
-      "智能体先做哪 3 个工具？",
+      "这周四条线先做哪条？",
+      "价格偏差和全成本怎么算？",
+      "占位费怎么仿真？",
       "答辩怎么讲创新点？"
     ],
-    hello: "队长好。我会先给结论，再给依据和下一步；资料里没有的我会直说。"
+    hello: "队长好。我会先给结论，再给依据和下一步；项目资料优先，项目外的问题也会直接答。"
   },
   "李树钧": {
-    title: "空间数据 · 地图可视化",
+    title: "空间数据 · 地图/前端",
     focus:
-      "李树钧是空间信息与数字技术专业，负责空间数据、GIS/POI/坐标、地图可视化、数据管道与页面。回答他时，优先给字段、坐标系、空间分析、地图交互和与队长接口的具体做法。",
+      "李树钧是空间信息与数字技术专业，负责空间数据、GIS/POI/坐标、地图可视化、前端页面和反馈系统。回答他时，优先给字段、坐标系、图层、交互和与队长的接口。",
     questions: [
-      "空间底表要哪些字段？",
-      "地图视图怎么做？",
-      "POI 坐标系怎么统一？",
-      "怎么和队长对接口？"
+      "价格地图要哪些图层？",
+      "站点账单页怎么排？",
+      "反馈入口怎么防刷？",
+      "POI 坐标怎么统一？"
     ],
-    hello: "树钧好。空间数据这块，我会尽量给到字段、坐标系和具体步骤。"
+    hello: "树钧好。空间数据和页面这块，我会尽量给到字段、坐标系和具体步骤。"
   },
   "彭加欣": {
-    title: "数据工程 · 获取与清洗",
+    title: "数据工程 · 价格审计",
     focus:
-      "彭加欣负责数据获取、清洗、数据字典和复现包，Python 基础还在补。回答他时，优先给 pandas 代码、字段清单、清洗规则、数据字典模板，步骤要小、能直接照做。",
+      "彭加欣负责数据获取、清洗、数据字典、价格审计和反馈数据，Python 基础还在补。回答他时，优先给 pandas 代码、字段清单、清洗规则、价格审计表和记录模板，步骤要小、能直接照做。",
     questions: [
-      "UrbanEV 怎么清洗？",
-      "数据字典要写什么？",
-      "高德 POI 怎么拉？",
-      "2026 四城数据怎么用？"
+      "20 站价格审计怎么做？",
+      "电网归属字段怎么填？",
+      "数据字典要哪些字段？",
+      "平台价和实付价怎么对比？"
     ],
     hello: "加欣好。数据这块我会给具体步骤和代码，遇到不会的直接说“看不懂哪一行”。"
   },
   "韩昊峰": {
-    title: "产品 · PPT 与答辩",
+    title: "实地 · PPT/答辩",
     focus:
-      "韩昊峰负责 PPT、演示脚本、模拟答辩和用户访谈。回答他时，优先给页面结构、叙事线、3 分钟演示脚本、评委可能的问题和答法。",
+      "韩昊峰负责实地踩点、访谈、PPT、演示脚本、模拟答辩和反馈运营。回答他时，优先给踩点分工、记录表、页面结构、3 分钟演示脚本、评委问题和答法。",
     questions: [
+      "实地踩点怎么分工？",
       "PPT 第一页怎么讲？",
-      "3 分钟演示脚本？",
-      "评委会问什么？",
-      "怎么准备模拟答辩？"
+      "评委问“和高德区别”怎么答？",
+      "3 分钟演示脚本？"
     ],
-    hello: "昊峰好。PPT 和答辩的问题，我会给结构、话术和演练方法。"
+    hello: "昊峰好。实地、PPT 和答辩的问题，我会给结构、话术和演练方法。"
   },
   "周思琪": {
-    title: "报告主笔 · 数据助理",
+    title: "报告 · 政策/质量",
     focus:
-      "周思琪是大数据管理与应用专业，负责报告主笔、格式、引用，空闲时支援彭加欣做清洗、核对、文献。回答她时，优先给报告结构、写法、格式规范、引用方式，以及“怎么帮数据组”的具体任务。",
+      "周思琪是大数据管理与应用专业，负责报告主笔、格式、引用、电网电价政策库和质量把控。回答她时，优先给报告结构、写法、格式规范、政策引用方式，以及“怎么帮数据组”的具体任务。",
     questions: [
-      "报告第一章写什么？",
-      "怎么帮彭加欣做数据核对？",
-      "参考文献怎么列？",
-      "报告格式有哪些硬要求？"
+      "报告新增哪几章？",
+      "电网电价政策怎么引用？",
+      "价格透明度怎么写？",
+      "分工表怎么落到报告？"
     ],
-    hello: "思琪好。报告和格式的问题，我会给结构、模板和检查清单。"
+    hello: "思琪好。报告、政策和格式的问题，我会给结构、模板和检查清单。"
   }
 };
 
@@ -217,8 +217,8 @@ function selectRole(name, persist = true) {
   $$(".role").forEach((b) => b.classList.toggle("active", b.dataset.role === name));
   const info = ROLES[name];
   $("#chat-title").textContent = name + " · 项目助教";
-  $("#chat-sub").textContent = info.title + " · 基于项目文档回答";
-  $("#input").placeholder = `问一个${name}分工里的具体问题…`;
+  $("#chat-sub").textContent = info.title + " · 项目资料优先，也能答通用问题";
+  $("#input").placeholder = `问一个${name}的问题，或任何技术/学习问题…`;
   renderQuick();
   loadHistory();
   renderHistory();
@@ -255,15 +255,16 @@ function renderWelcome() {
   const box = $("#messages");
   const info = ROLES[state.role];
   const chips = info.questions.concat([
-    "这个项目和 2026 赛题有什么区别？",
-    "数据从哪来、合法吗？"
+    "这个项目和高德有什么区别？",
+    "Python 怎么读 CSV？",
+    "Git 提交失败怎么办？"
   ]);
   const wrap = document.createElement("div");
   wrap.className = "welcome";
   wrap.innerHTML = `
     <h2>${state.role}，今天想解决什么？</h2>
     <p>${info.hello}</p>
-    <p>我会先查项目资料，再回答；每个结论尽量标出来源。</p>
+    <p>项目资料优先；项目外的问题也可以问，我会说明“这是通用建议，不是项目资料”。</p>
     <div class="chips"></div>
   `;
   const chipBox = wrap.querySelector(".chips");
@@ -372,28 +373,33 @@ function removeTyping() {
   if (el) el.remove();
 }
 
-function buildSystemPrompt(sources) {
+function buildSystemPrompt(sources, projectMode) {
   const info = ROLES[state.role];
   const ctx = sources
     .map((s, i) => `【资料${i + 1}】${s.file} · ${s.heading}\n${truncate(s.text, 1600)}`)
     .join("\n\n");
-  return `你是“充电站运营可视分析”项目组的项目助教，服务五名大一队员。你的任务是基于下面的【项目资料】回答他们关于分工、方法、数据、提交和答辩的问题。
+  const modeText = projectMode
+    ? "本轮是项目问题：优先用【项目资料】回答；关键结论标 [资料n]；资料没有就说“项目资料里没有”，再给通用建议。"
+    : "本轮是通用问题：正常回答，不要硬套项目资料；下面资料相关才引用，不相关就忽略。";
+  return `你是“桩尽其用”项目组的 AI 助手，也是五名队员的通用技术助手。你既懂这个项目，也能回答编程、Git、Streamlit、Office、学习方法等通用问题。
 
-【必须遵守】
-1. 只根据【项目资料】回答；资料没有的，直接说“项目资料里没有这部分”，再给一个可执行的下一步（问谁／查哪份文件／去哪找），不要编。
-2. 关键结论后用 [资料n] 标注来源；来源必须来自下面列出的资料编号，不能伪造。
-3. 区分“资料里写的”与“我的建议”；建议要说明依据和风险。
-4. 数字、日期、分工、指标必须与资料一致；不确定就写“不确定”。
-5. 回答具体、可执行：给步骤、字段、代码片段、模板；不要空话。
-6. 不回答与项目无关的问题；可以一句带过。
-7. 用中文，面向大一学生，术语要解释。
+【本轮模式】
+${modeText}
+
+【回答规则】
+1. 项目问题：优先用【项目资料】；关键结论后用 [资料n] 标注来源，来源必须是下面列出的编号，不能伪造。资料没有就直说，再给可执行的下一步。
+2. 通用问题：正常回答，不要求项目资料；如果用了通用知识，说明“以下是通用建议，不是项目资料”。不要因为问题与项目无关就拒绝。
+3. 不编项目数字、日期、分工、指标；不确定就写“不确定”。项目资料与通用知识冲突时，项目问题以资料为准。
+4. 先给结论，再给步骤或理由；给代码、命令、模板、字段；不要空话。
+5. 用中文，面向大一学生，术语要解释；代码和变量名保持英文。
+6. 可以回答项目外的问题，但涉及违法、危险、隐私、冒充他人时要拒绝或提醒风险。
 
 【当前提问者】
 ${state.role}（${info.title}）
 ${info.focus}
 
 【项目资料】
-${ctx}`;
+${ctx || "（本轮没有检索到项目资料）"}`;
 }
 
 async function callAPI(messages) {
@@ -425,6 +431,13 @@ async function callAPI(messages) {
   return data;
 }
 
+const PROJECT_HINTS =
+  /项目|充电|电站|电网|电价|电费|服务费|停车费|占位|排队|价格|审计|反馈|站点|城市|赛|答辩|报告|分工|数据|指标|可视化|智能体|用户|运营商|政府|长沙|深圳|北京|上海|重庆|郴州|UrbanEV|特来电|星星|小桔|高德|百度|2026|2027/i;
+
+function isProjectQuestion(text) {
+  return PROJECT_HINTS.test(String(text || ""));
+}
+
 async function send(text) {
   const q = String(text || "").trim();
   if (!q || state.busy) return;
@@ -448,17 +461,20 @@ async function send(text) {
   showTyping();
 
   try {
+    const projectMode = isProjectQuestion(q);
     const retrieved = retrieve(state.chunks, q, state.role, Number(state.config.TOP_K) || 6);
     const sources = [];
-    if (state.fact) {
+    if (projectMode && state.fact) {
       sources.push({ file: "00-项目事实卡.md", heading: "项目事实卡", text: state.fact });
     }
     for (const c of retrieved) {
+      if (!projectMode && Number(c.score) < 6) continue;
       if (sources.some((s) => s.file === c.file && s.heading === c.heading)) continue;
-      sources.push({ file: c.file, heading: c.heading, text: c.text });
+      sources.push({ file: c.file, heading: c.heading, text: c.text, score: c.score });
     }
+    if (!projectMode && sources.length > 4) sources.length = 4;
 
-    const system = buildSystemPrompt(sources);
+    const system = buildSystemPrompt(sources, projectMode);
     const messages = [
       { role: "system", content: system },
       ...history.slice(-12).map((m) => ({ role: m.role, content: m.content }))
@@ -620,15 +636,16 @@ function bindEvents() {
 }
 
 function seedDemo() {
-  const demoQ = "这周我该先做什么？";
+  const demoQ = "这周四条线先做哪条？";
   const demoA =
-    "先做三件事，别铺开：\n\n" +
-    "1. **建仓库和骨架**：目录固定为 `data/ src/ notebooks/ docs/ assets/`，先把 Streamlit 三页空壳跑起来。\n" +
-    "2. **做 3 张分析图**：利用率分布、24 小时曲线、Top20 站点；每张图配一句结论。\n" +
-    "3. **和李树钧定接口**：把 `station_hour` 的字段、时间粒度、缺失值规则写成一页 `docs/interface.md`，再开始各做各的。\n\n" +
-    "依据：P0 的任务就是“数据＋三张图＋storyline”，不要提前去卷模型。[资料1]";
+    "先做“能拿证据”的两条，不要先卷模型：\n\n" +
+    "1. **价格审计 + 电网政策**：彭加欣建价格审计表，周思琪收国网/南网/地方电网的代理购电与峰谷公告；先做 20 个站。\n" +
+    "2. **20 站实地踩点**：韩昊峰排路线，拍价格牌、现场小程序价、实付账单，记录占位/坏桩。\n" +
+    "3. **三页骨架**：李树钧把“价格地图 / 站点账单 / 治理沙盘”空壳跑起来，先用小样本。\n" +
+    "4. **占位机制一页纸**：刘子正把“预约 + 10 分钟插枪 + 宽限 + 阶梯占用费 + 申诉”写成可讨论的方案。\n\n" +
+    "依据：P0 的目标是“数据 + 证据 + 原型”，不是完整系统。[资料1]";
   const sources = state.chunks
-    .filter((c) => c.file === "07-分工与阶段计划.md" && ["P0 具体任务", "每周节奏"].includes(c.heading))
+    .filter((c) => c.file === "07-分工与阶段计划.md" && ["P0 四周任务", "每周节奏"].includes(c.heading))
     .slice(0, 2);
   if (!sources.length && state.chunks.length) sources.push(state.chunks[0]);
   state.history[state.role] = [

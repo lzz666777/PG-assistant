@@ -70,23 +70,47 @@ export function scoreChunk(chunk, toks) {
 }
 
 const EXPAND = [
-  [/这周|本周|现在|下一步|先做|该做|优先/, "P0 具体任务 本周计划 优先级"],
+  [/这周|本周|现在|下一步|先做|该做|优先/, "P0 四周任务 优先级 价格审计 电网政策"],
   [/字段|表结构|数据字典|字段名/, "字段建议 数据字典 station_hour"],
-  [/分工|谁做|负责|角色/, "五个角色 分工"],
+  [/分工|谁做|负责|角色/, "五个角色 分工 RACI"],
   [/来源|哪来|合法|合规/, "数据方案 数据来源 合规"],
   [/答辩|评委|提问/, "答辩 模拟答辩 Q&A"],
   [/报告|第一章|写法|格式/, "报告结构 格式审查 交付物"],
-  [/可视化|大屏|视图/, "可视化系统 三个视图"],
-  [/智能体|agent/i, "智能体 工具 防幻觉"]
+  [/可视化|大屏|视图|页面/, "可视化系统 四个模块 价格地图 站点账单"],
+  [/智能体|agent/i, "智能体 工具 通用助手 防幻觉"],
+  [/价格|电费|服务费|停车费|套路|透明/, "价格偏差 全成本 价格透明度 套路指数"],
+  [/电网|国网|南网|电价|峰谷|地方电网/, "电网归属 电价公开 国网 南网 地方电网"],
+  [/占位|占用|有效供给|假空闲/, "占位机制 有效供给 占用费 仿真"],
+  [/反馈|评论|上报|坏桩/, "用户反馈 审核 防刷 问题地图"],
+  [/python|pandas|streamlit|plotly|代码|报错|函数|库|路径/i, "技术问答 开发环境 排错"],
+  [/git|github|vscode|vs code|代理|vpn|clash|worker|部署/i, "开发环境 排错 Git GitHub 代理"],
+  [/图标|emoji|material|svg|图片/i, "技术问答 Streamlit 图标 Material SVG"]
 ];
 
 const ROLE_FILES = {
-  "刘子正": ["04-数据分析方法.md", "05-智能体.md", "00-项目事实卡.md"],
-  "李树钧": ["06-数据方案.md", "03-可视化系统.md"],
-  "彭加欣": ["06-数据方案.md", "00-项目事实卡.md"],
-  "韩昊峰": ["03-可视化系统.md", "09-交付物与提交.md", "08-常见问题.md"],
-  "周思琪": ["09-交付物与提交.md", "07-分工与阶段计划.md", "08-常见问题.md"]
+  "刘子正": ["04-数据分析方法.md", "05-智能体.md", "00-项目事实卡.md", "02-分析叙事线.md", "07-分工与阶段计划.md", "12-项目演进与决策记录.md", "10-技术问答.md"],
+  "李树钧": ["06-数据方案.md", "03-可视化系统.md", "00-项目事实卡.md", "10-技术问答.md"],
+  "彭加欣": ["06-数据方案.md", "04-数据分析方法.md", "00-项目事实卡.md", "10-技术问答.md"],
+  "韩昊峰": ["03-可视化系统.md", "09-交付物与提交.md", "08-常见问题.md", "07-分工与阶段计划.md"],
+  "周思琪": ["09-交付物与提交.md", "07-分工与阶段计划.md", "08-常见问题.md", "01-项目定位与背景.md"]
 };
+
+const INTENT_BOOST = [
+  [/这周|本周|先做|优先|P0|下一步/, ["07-分工与阶段计划.md"], 20],
+  [/价格偏差|全成本|透明度|套路|价格审计/, ["04-数据分析方法.md", "06-数据方案.md"], 15],
+  [/占位|占用费|有效供给|假空闲/, ["04-数据分析方法.md", "03-可视化系统.md"], 8],
+  [/电网|电价|国网|南网|峰谷/, ["01-项目定位与背景.md", "04-数据分析方法.md", "06-数据方案.md"], 6],
+  [/高德|区别|创新|差异化/, ["08-常见问题.md", "01-项目定位与背景.md"], 8],
+  [/python|pandas|streamlit|plotly|git|github|vscode|报错|代码/i, ["10-技术问答.md", "11-开发环境与排错.md"], 8]
+];
+
+function intentBoost(query, file) {
+  let bonus = 0;
+  for (const [re, files, n] of INTENT_BOOST) {
+    if (re.test(query) && files.includes(file)) bonus += n;
+  }
+  return bonus;
+}
 
 export function retrieve(chunks, query, role, topK = 6) {
   let expanded = String(query || "");
@@ -98,7 +122,7 @@ export function retrieve(chunks, query, role, topK = 6) {
   const scored = chunks
     .map((c) => ({
       ...c,
-      score: scoreChunk(c, toks) + (roleFiles.includes(c.file) ? 2 : 0)
+      score: scoreChunk(c, toks) + (roleFiles.includes(c.file) ? 2 : 0) + intentBoost(expanded, c.file)
     }))
     .filter((c) => c.score > 0)
     .sort((a, b) => b.score - a.score);
