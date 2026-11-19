@@ -474,6 +474,7 @@ async function send(text) {
       sources.push({ file: "00-项目事实卡.md", heading: "项目事实卡", text: state.fact });
     }
     for (const c of retrieved) {
+      if (!projectMode && c.file === "00-项目事实卡.md") continue;
       if (!projectMode && Number(c.score) < 6) continue;
       if (sources.some((s) => s.file === c.file && s.heading === c.heading)) continue;
       sources.push({ file: c.file, heading: c.heading, text: c.text, score: c.score });
